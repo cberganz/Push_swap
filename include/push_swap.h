@@ -6,7 +6,7 @@
 /*   By: cberganz <cberganz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 03:49:06 by cberganz          #+#    #+#             */
-/*   Updated: 2021/12/13 19:55:28 by cberganz         ###   ########.fr       */
+/*   Updated: 2022/01/09 15:36:28 by cberganz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 
 # define CLEAR_LIST 1
 # define DO_NOT_CLEAR_LIST 0
-# define A_IS_NOT_EMPTY 2
+# define A_IS_NOT_EMPTY -1
 # define B_IS_NOT_EMPTY -1
 # define PUT_LOWER_ON_TOP 2
 # define PREPARE_FOR_PA 1

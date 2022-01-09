@@ -2,8 +2,8 @@
 
 max=0
 min=0
-test_nb=10
-value_nb=500
+test_nb=1000
+value_nb=100
 min_val=1
 max_val=50000
 moyenne=0

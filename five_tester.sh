@@ -1373,7 +1373,7 @@ testing5() {
 testing100() {
 max=0
 min=100000
-test_nb=10
+test_nb=2000
 value_nb=100
 min_val=1
 max_val=50000
@@ -1418,7 +1418,7 @@ nb_errors=0
 testing500() {
 max=0
 min=100000
-test_nb=1
+test_nb=10
 value_nb=500
 min_val=1
 max_val=50000
