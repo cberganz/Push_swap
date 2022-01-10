@@ -2,7 +2,7 @@
 
 min_val=1
 max_val=50000
-value_nb=500
+value_nb=100
 
 arg=`shuf -i $min_val-$max_val -n $value_nb`
 arg=`echo $arg | sed 's/\n/ /g'`

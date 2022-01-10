@@ -22,7 +22,7 @@ void	rotate_a_opti(t_stacks *s, int we_need_to)
 	i = 0;
 	to_match = 0; // remove ?
 	if (we_need_to == PUT_LOWER_ON_TOP)
-		to_match = get_lower(s->a, s->a_top + 1);
+		to_match = get_lower(s, STACK_A);
 	else if (we_need_to == PREPARE_FOR_PA)
 		to_match = s->b[s->b_top];
 	while (i <= s->a_top
@@ -51,8 +51,8 @@ void	pa_sorted(t_stacks *s)
 	}
 	else
 	{
-		if (s->b[s->b_top] < get_lower(s->a, s->a_top + 1)
-				|| s->b[s->b_top] > get_higher(s->a, s->a_top + 1))
+		if (s->b[s->b_top] < get_lower(s, STACK_A)
+				|| s->b[s->b_top] > get_higher(s, STACK_A))
 			rotate_a_opti(s, PUT_LOWER_ON_TOP);
 		else
 			rotate_a_opti(s, PREPARE_FOR_PA);

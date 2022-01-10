@@ -27,8 +27,12 @@
 # define DO_NOT_CLEAR_LIST 0
 # define A_IS_NOT_EMPTY -1
 # define B_IS_NOT_EMPTY -1
+# define A_IS_EMPTY -1
+# define B_IS_EMPTY -1
 # define PUT_LOWER_ON_TOP 2
 # define PREPARE_FOR_PA 1
+# define STACK_A 1
+# define STACK_B 2
 
 /*
  * Structures definitions
@@ -106,9 +110,10 @@ void	optimize_list(t_list *lst);
 uint8_t		not_int(char *s);
 uint8_t		is_double(t_stacks *s, int to_check, int size);
 void	ft_sort_int_tab(int *tab, int size);
-int		get_higher(int *s, int size);
-int		get_lower(int *s, int size);
-int		get_position(t_stacks *s, int nb);
+int		get_higher(t_stacks *s, int which_stack);
+int		get_lower(t_stacks *s, int which_stack);
+int		get_position(t_stacks *s, int nbr_to_find, int find_in);
+int		get_immediatly_above_number(t_stacks *s, int to_match);
 void	free_stacks(t_stacks **s, int cleanlistornot);
 t_stacks	*stacks_cpy(t_stacks **s);
 

@@ -1,27 +1,6 @@
 #include "../include/push_swap.h"
 
-//static uint8_t	is_not_in_five_highest(t_stacks *s, int index)
-//{
-//	if (s->a[index] > get_higher(s->a, s->a_top + 1) - 3)
-//		return (0);
-//	return (1);
-//}
-
-static uint8_t	chuncked_in_a(t_stacks **s, int chunck_max)
-{
-	int	i;
-
-	i = 0;
-	while (i <= (*s)->a_top)
-	{
-		if ((*s)->a[i] <= chunck_max)
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-static uint8_t	no_more_chuncked_in_b(t_stacks **s, int chunck_min)
+static uint8_t	left_chuncked_in_b(t_stacks **s, int chunck_min)
 {
 	int	i;
 
@@ -29,88 +8,90 @@ static uint8_t	no_more_chuncked_in_b(t_stacks **s, int chunck_min)
 	while (i <= (*s)->b_top)
 	{
 		if ((*s)->b[i] > chunck_min)
-			return (0);
+			return (1);
 		i++;
 	}
-	return (1);
+	return (0);
 }
 
-static void	push_one_chunck_from_a_to_b(t_stacks **s, int chunck_max)
+static void	push_a_to_b_with_two_chuncks(t_stacks **s)
 {
-	int	i;
-
-	i = 0;
-	while (i < (*s)->size)
+	while ((*s)->a_top > (*s)->size / 2 - 1)
 	{
-		if ((*s)->a[(*s)->a_top] <= chunck_max)
+		if ((*s)->a[(*s)->a_top] <= (*s)->size / 2)
 			pb(*s);
 		else
 			ra(*s);
-		i++;
+	}
+	while (A_IS_NOT_EMPTY != (*s)->a_top)
+	{
+		if ((*s)->a[(*s)->a_top] <= (*s)->size)
+			pb(*s);
+		else
+			ra(*s);
 	}
 }
 
-void	push_best_b_to_a(t_stacks **s, int chunck_indicator)
+static int	get_cost_to_push_sorted(t_stacks *s, int index_b)
+{
+	int cost;
+	int	to_get_on_top;
+	int	index_a;
+
+	if (index_b > s->b_top / 2)
+		cost = s->b_top - index_b;
+	else
+		cost = index_b + 1;
+	if (s->b[index_b] < get_lower(s, STACK_A)
+	|| s->b[index_b] > get_higher(s, STACK_A))
+		to_get_on_top = get_lower(s, STACK_A);
+	else
+		to_get_on_top = get_immediatly_above_number(s, s->b[index_b]);
+	index_a = get_position(s, to_get_on_top, STACK_A);
+	if (index_a > s->a_top / 2)
+		cost += s->a_top - index_a;
+	else
+		cost += index_a + 1;
+	cost += 1;
+	return (cost);
+}
+
+
+void	push_best_b_to_a(t_stacks **s, int chunck_min)
 {
 	int	index;
-	t_stacks	*best;
-	t_stacks	*s_cpy;
+	int	cost_current;
+	int	cost_best;
+	int	index_best;
 
-	best = NULL;
 	index = (*s)->b_top;
+	cost_best = INT_MAX;
 	while (index >= 0)
 	{
-		if ((*s)->b[index] > chunck_indicator)
+		if ((*s)->b[index] > chunck_min)
 		{
-			s_cpy = stacks_cpy(s);
-			ft_lstclear(&s_cpy->lst);
-			rotate_b_opti(s_cpy, index);
-			pa_sorted(s_cpy);
-			optimize_list(s_cpy->lst);
-			if (best == NULL)
-				best = s_cpy;
-			else if (ft_lstsize(s_cpy->lst) < ft_lstsize(best->lst))
+			cost_current = get_cost_to_push_sorted(*s, index);
+			if (cost_current < cost_best)
 			{
-				free_stacks(&best, CLEAR_LIST);
-				best = s_cpy;
+				cost_best = cost_current;
+				index_best = index;
 			}
-			else
-				free_stacks(&s_cpy, CLEAR_LIST);
 		}
 		index--;
 	}
-	if ((*s)->lst && best)
-	{
-		ft_lstlast((*s)->lst)->next = best->lst;
-		best->lst = (*s)->lst;
-	}
-	if (best)
-	{
-		free_stacks(s, DO_NOT_CLEAR_LIST);
-		*s = best;
-	}
+	rotate_b_opti(*s, index_best);
+	pa_sorted(*s);
 }
 
 void	push_swap_big(t_stacks **s)
 {
-	int	chunck_indicator;
-
 	if (is_sorted(*s))
 		return ;
-	chunck_indicator = (*s)->size / 2;
-	while (chuncked_in_a(s, chunck_indicator))
-	{
-		push_one_chunck_from_a_to_b(s, chunck_indicator);
-		chunck_indicator = (*s)->size - 5;
-	}
-	push_swap_little(*s);
-	chunck_indicator = (*s)->size / 2;
-	while (B_IS_NOT_EMPTY != (*s)->b_top)
-	{
-		push_best_b_to_a(s, chunck_indicator);
-		if (no_more_chuncked_in_b(s, chunck_indicator))
-				chunck_indicator = 0;
-	}
+	push_a_to_b_with_two_chuncks(s);
+	while (left_chuncked_in_b(s, (*s)->size / 2))
+		push_best_b_to_a(s, (*s)->size / 2);
+	while (left_chuncked_in_b(s, 0))
+		push_best_b_to_a(s, 0);
 	rotate_a_opti(*s, PUT_LOWER_ON_TOP);
 	optimize_list((*s)->lst);
 }

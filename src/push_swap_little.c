@@ -57,7 +57,7 @@ static void	size_5(t_stacks *s)
 		return ;
 	while (s->a_top != 2)
 	{
-		while (s->a[s->a_top] > get_lower(s->a, s->a_top + 1))
+		while (s->a[s->a_top] > get_lower(s, STACK_A))
 			ra(s);
 		pb(s);
 	}
