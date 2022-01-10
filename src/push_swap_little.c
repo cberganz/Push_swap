@@ -6,7 +6,7 @@
 /*   By: cberganz <cberganz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 07:35:58 by cberganz          #+#    #+#             */
-/*   Updated: 2021/12/11 08:01:29 by cberganz         ###   ########.fr       */
+/*   Updated: 2022/01/10 14:32:36 by cberganz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ static void	size_3(t_stacks *s)
 
 static void	size_4(t_stacks *s)
 {
-	if (is_sorted(s))
-		return ;
 	pb(s);
 	size_3(s);
 	while (s->a[s->a_top] != s->b[s->b_top] + 1)
@@ -53,11 +51,9 @@ static void	size_4(t_stacks *s)
 
 static void	size_5(t_stacks *s)
 {
-	if (is_sorted(s))
-		return ;
 	while (s->a_top != 2)
 	{
-		while (s->a[s->a_top] > get_lower(s, STACK_A))
+		while (s->a[s->a_top] > 2)
 			ra(s);
 		pb(s);
 	}
@@ -70,6 +66,8 @@ static void	size_5(t_stacks *s)
 
 void	push_swap_little(t_stacks *s)
 {
+	if (is_sorted(s))
+		return ;
 	if (s->a_top == 1)
 		size_2(s);
 	else if (s->a_top == 2)

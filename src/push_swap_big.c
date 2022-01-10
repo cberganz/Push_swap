@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap_big.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cberganz <cberganz@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/10 13:30:13 by cberganz          #+#    #+#             */
+/*   Updated: 2022/01/10 15:16:36 by cberganz         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/push_swap.h"
 
 static uint8_t	left_chuncked_in_b(t_stacks **s, int chunck_min)
@@ -34,7 +46,7 @@ static void	push_a_to_b_with_two_chuncks(t_stacks **s)
 
 static int	get_cost_to_push_sorted(t_stacks *s, int index_b)
 {
-	int cost;
+	int	cost;
 	int	to_get_on_top;
 	int	index_a;
 
@@ -43,7 +55,7 @@ static int	get_cost_to_push_sorted(t_stacks *s, int index_b)
 	else
 		cost = index_b + 1;
 	if (s->b[index_b] < get_lower(s, STACK_A)
-	|| s->b[index_b] > get_higher(s, STACK_A))
+		|| s->b[index_b] > get_higher(s, STACK_A))
 		to_get_on_top = get_lower(s, STACK_A);
 	else
 		to_get_on_top = get_immediatly_above_number(s, s->b[index_b]);
@@ -55,7 +67,6 @@ static int	get_cost_to_push_sorted(t_stacks *s, int index_b)
 	cost += 1;
 	return (cost);
 }
-
 
 void	push_best_b_to_a(t_stacks **s, int chunck_min)
 {

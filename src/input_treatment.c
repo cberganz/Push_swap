@@ -6,7 +6,7 @@
 /*   By: cberganz <cberganz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 00:24:30 by cberganz          #+#    #+#             */
-/*   Updated: 2021/12/11 10:45:38 by cberganz         ###   ########.fr       */
+/*   Updated: 2022/01/10 15:25:25 by cberganz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ t_stacks	*input_treatment(int argc, char **argv)
 		free(s);
 		return (NULL);
 	}
-	if (s->size == -2)
+	else if (s->size == -2)
 	{
 		free(s->a);
 		free(s);

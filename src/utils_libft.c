@@ -1,45 +1,16 @@
-#include "push_swap.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_libft.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cberganz <cberganz@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/10 13:28:29 by cberganz          #+#    #+#             */
+/*   Updated: 2022/01/10 15:43:36 by cberganz         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-//static size_t	ft_strlen(const char *s)
-//{
-//	size_t	len;
-//
-//	len = 0;
-//	while (s[len])
-//		len++;
-//	return (len);
-//}
-//
-//static size_t	ft_strlcpy(char *dst, const char *src, size_t size)
-//{
-//	size_t	i;
-//
-//	i = 0;
-//	if (size == 0)
-//		return (ft_strlen(src));
-//	while (src[i] && i < size - 1)
-//	{
-//		dst[i] = src[i];
-//		i++;
-//	}
-//	dst[i] = '\0';
-//	while (src[i])
-//		i++;
-//	return (i);
-//}
-//
-//char	*ft_strdup(const char *s)
-//{
-//	char	*sdup;
-//	size_t	len;
-//
-//	len = ft_strlen(s) + 1;
-//	sdup = malloc(len * sizeof(char));
-//	if (!sdup)
-//		return (NULL);
-//	ft_strlcpy(sdup, s, len);
-//	return (sdup);
-//}
+#include "../include/push_swap.h"
 
 int	ft_strcmp(const char *s1, const char *s2)
 {

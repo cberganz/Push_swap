@@ -6,7 +6,7 @@
 /*   By: cberganz <cberganz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 03:55:50 by cberganz          #+#    #+#             */
-/*   Updated: 2021/12/11 10:49:03 by cberganz         ###   ########.fr       */
+/*   Updated: 2022/01/10 15:59:09 by cberganz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,23 +66,21 @@ uint8_t	not_int(char *s)
 
 	result = 0;
 	sign = 1;
-	while (*s == ' ' || (*s >= '\t' && *s <= '\r'))
-		s++;
-	if (*s == '\0')
-		return (1);
 	if (*s == '+' || *s == '-')
 	{
 		if (*s == '-')
 			sign = -1;
 		s++;
 	}
+	if (*s == '\0' || *s < '0' || *s > '9')
+		return (1);
 	while (*s >= '0' && *s <= '9')
 	{
 		result = (result * 10) + (*s - '0');
 		s++;
 	}
 	if ((result * sign) < INT_MIN || (result * sign) > INT_MAX
-			|| *s != '\0')
+		|| *s != '\0')
 		return (1);
 	else
 		return (0);

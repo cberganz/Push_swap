@@ -6,7 +6,7 @@
 /*   By: cberganz <cberganz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 03:54:10 by cberganz          #+#    #+#             */
-/*   Updated: 2022/01/09 16:30:25 by cberganz         ###   ########.fr       */
+/*   Updated: 2022/01/10 15:25:10 by cberganz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,6 @@ int	main(int argc, char **argv)
 	else
 		push_swap_big(&s);
 	ft_lstprint(s->lst);
-//	print_stacks(s);
-//	if (is_sorted(s))
-//		printf("OK\n");
-//	else
-//		printf("KO\n");
 	free_stacks(&s, CLEAR_LIST);
 	exit(EXIT_SUCCESS);
 }
