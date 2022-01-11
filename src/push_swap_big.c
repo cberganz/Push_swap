@@ -28,7 +28,7 @@ static uint8_t	left_chuncked_in_b(t_stacks **s, int chunck_min)
 
 static void	push_a_to_b_with_two_chuncks(t_stacks **s)
 {
-	while ((*s)->a_top > (*s)->size / 2 - 1)
+	while ((*s)->a_top > (*s)->size / 2)
 	{
 		if ((*s)->a[(*s)->a_top] <= (*s)->size / 2)
 			pb(*s);
@@ -36,12 +36,7 @@ static void	push_a_to_b_with_two_chuncks(t_stacks **s)
 			ra(*s);
 	}
 	while (A_IS_NOT_EMPTY != (*s)->a_top)
-	{
-		if ((*s)->a[(*s)->a_top] <= (*s)->size)
-			pb(*s);
-		else
-			ra(*s);
-	}
+		pb(*s);
 }
 
 static int	get_cost_to_push_sorted(t_stacks *s, int index_b)

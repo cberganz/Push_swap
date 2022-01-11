@@ -40,13 +40,21 @@ static void	size_3(t_stacks *s)
 
 static void	size_4(t_stacks *s)
 {
-	pb(s);
+//	pb(s);
+//	size_3(s);
+//	while (s->a[s->a_top] != s->b[s->b_top] + 1)
+//		ra(s);
+//	pa(s);
+//	while (!is_sorted(s))
+//		ra(s);
+	while (s->a_top != 2)
+	{
+		while (s->a[s->a_top] > 1)
+			ra(s);
+		pb(s);
+	}
 	size_3(s);
-	while (s->a[s->a_top] != s->b[s->b_top] + 1)
-		ra(s);
 	pa(s);
-	while (!is_sorted(s))
-		ra(s);
 }
 
 static void	size_5(t_stacks *s)
