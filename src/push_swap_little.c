@@ -67,8 +67,6 @@ static void	size_5(t_stacks *s)
 
 void	push_swap_little(t_stacks *s)
 {
-	if (is_sorted(s))
-		return ;
 	if (s->a_top == 1)
 		size_2(s);
 	else if (s->a_top == 2)

@@ -21,7 +21,7 @@ void	pa(t_stacks *s)
 		s->a_top += 1;
 		s->b_top -= 1;
 	}
-	ft_lstadd_back(&s->lst, ft_lstnew("pa\n"));
+	ft_lstadd_back(&s->lst, ft_lstnew(ft_strdup("pa\n")));
 }
 
 void	pb(t_stacks *s)
@@ -33,5 +33,5 @@ void	pb(t_stacks *s)
 		s->b_top += 1;
 		s->a_top -= 1;
 	}
-	ft_lstadd_back(&s->lst, ft_lstnew("pb\n"));
+	ft_lstadd_back(&s->lst, ft_lstnew(ft_strdup("pb\n")));
 }

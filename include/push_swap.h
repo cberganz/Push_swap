@@ -82,6 +82,7 @@ void	ft_lstdelone(t_list *lst);
 void	ft_lstclear(t_list **lst);
 void	ft_lstprint(t_list *lst);
 int	ft_lstsize(t_list *lst);
+char	*ft_strdup(const char *s);
 t_list	*ft_lstlast(t_list *lst);
 
 /*
@@ -122,6 +123,6 @@ t_stacks	*stacks_cpy(t_stacks **s);
 */
 
 void	print_stacks(t_stacks *s);
-int		is_sorted(t_stacks *s);
+uint8_t		is_sorted(t_stacks *s);
 
 #endif

@@ -25,7 +25,7 @@ void	ra(t_stacks *s)
 		s->a[i - 1] = tmp;
 		i--;
 	}
-	ft_lstadd_back(&s->lst, ft_lstnew("ra\n"));
+	ft_lstadd_back(&s->lst, ft_lstnew(ft_strdup("ra\n")));
 }
 
 void	rb(t_stacks *s)
@@ -41,7 +41,7 @@ void	rb(t_stacks *s)
 		s->b[i - 1] = tmp;
 		i--;
 	}
-	ft_lstadd_back(&s->lst, ft_lstnew("rb\n"));
+	ft_lstadd_back(&s->lst, ft_lstnew(ft_strdup("rb\n")));
 }
 
 void	rr(t_stacks *s)
@@ -65,5 +65,5 @@ void	rr(t_stacks *s)
 		s->b[i - 1] = tmp;
 		i--;
 	}
-	ft_lstadd_back(&s->lst, ft_lstnew("rr\n"));
+	ft_lstadd_back(&s->lst, ft_lstnew(ft_strdup("rr\n")));
 }

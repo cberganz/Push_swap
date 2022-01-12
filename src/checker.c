@@ -10,63 +10,86 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/push_swap_checker.h"
+#include "../include/push_swap.h"
 
-static int	exec_operations(t_stacks *s)
+static void	ft_exit(t_stacks **s, t_list **lst, int exit_code)
 {
-	t_list	*lst;
-
-	lst = s->lst;
-	while (lst)
-	{
-		if (ft_strcmp(lst->content, "sa\n") == 0)
-			sa(s);
-		else if (ft_strcmp(lst->content, "sb\n") == 0)
-			sb(s);
-		else if (ft_strcmp(lst->content, "ss\n") == 0)
-			ss(s);
-		else if (ft_strcmp(lst->content, "pa\n") == 0)
-			pa(s);
-		else if (ft_strcmp(lst->content, "pb\n") == 0)
-			pb(s);
-		else if (ft_strcmp(lst->content, "ra\n") == 0)
-			ra(s);
-		else if (ft_strcmp(lst->content, "rb\n") == 0)
-			rb(s);
-		else if (ft_strcmp(lst->content, "rr\n") == 0)
-			rr(s);
-		else if (ft_strcmp(lst->content, "rra\n") == 0)
-			rra(s);
-		else if (ft_strcmp(lst->content, "rrb\n") == 0)
-			rrb(s);
-		else if (ft_strcmp(lst->content, "rrr\n") == 0)
-			rrr(s);
-		else
-			return (ERROR);
-		lst = lst->next;
-	}
-	return (SUCCESS);
+	if (exit_code == EXIT_SUCCESS)
+		free_stacks(s, CLEAR_LIST);
+//	if (exit_code == EXIT_FAILURE)
+//		write(2, "Error\n", 6);
+	ft_lstclear(lst);
+	exit(exit_code);
 }
 
-void	main(int argc, char **argv)
+static int8_t	exec_operations(t_stacks **s, t_list *lst)
+{
+	char	*op[12] = {"sa", "sb", "ss", "pa", "pb", "ra", "rb", "rr", "rra", "rrb", "rrr", NULL};
+	void (*func_ptr[11])(t_stacks *) = { sa, sb, ss, pa, pb, ra, rb, rr, rra, rrb, rrr };
+	int i;
+
+	while (lst)
+	{
+		i = 0;
+		while (op[i] != NULL && ft_strcmp(lst->content, op[i]))
+			i++;
+		if (op[i] != NULL)
+			func_ptr[i](*s);
+		else
+			return (0);
+		lst = lst->next;
+	}
+	return (1);
+}
+
+static uint8_t	init_operations_list(t_list **lst)
+{
+	int		ret;
+	int		count;
+	char	c;
+	char	op[4];
+
+	count = 0;
+	while ((ret = read(STDIN_FILENO, &c, 1)) > 0)
+	{
+		if (c != '\n' && count < 3)
+		{
+			op[count] = c;
+			count++;
+		}
+		else if (c == '\n')
+		{
+			op[count] = '\0';
+			ft_lstadd_back(lst, ft_lstnew(ft_strdup(op)));
+			count = 0;
+		}
+		else
+			return (0);
+	}
+	return (1);
+}
+
+int	main(int argc, char **argv)
 {
 	t_stacks	*s;
+	t_list		*lst;
 
+	lst = NULL;
 	if (argc < 2)
-		write(2, "Error\n", 6);
-	else
+		return (EXIT_SUCCESS);
+	if (!init_operations_list(&lst))
+		ft_exit(&s, &lst, EXIT_SUCCESS);
+	s = input_treatment(argc, argv);
+	if (!s)
+		ft_exit(&s, &lst, EXIT_FAILURE);
+	if (!exec_operations(&s, lst))
 	{
-		s = input_treatment(argc, argv);
-		if (!s)
-			exit(EXIT_FAILURE);
-		read_operations(s);
-		if (!exec_operations(s))
-			write(1, "Error\n", 6);
-		else if (is_sorted(s))
-			write(1, "OK\n", 3);
-		else
-			write(1, "KO\n", 3);
-		free_stacks(&s, CLEAR_LIST);
+		write(2, "Error\n", 6);
+		ft_exit(&s, &lst, EXIT_SUCCESS);
 	}
-	exit(EXIT_SUCCESS);
+	else if (is_sorted(s))
+		write(1, "OK\n", 3);
+	else
+		write(1, "KO\n", 3);
+	ft_exit(&s, &lst, EXIT_SUCCESS);
 }

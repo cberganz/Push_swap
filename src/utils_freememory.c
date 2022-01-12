@@ -17,6 +17,8 @@ void	ft_lstdelone(t_list *lst)
 	if (lst)
 	{
 		lst->next = NULL;
+		if (lst->content)
+			free(lst->content);
 		free(lst);
 	}
 }

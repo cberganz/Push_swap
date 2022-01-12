@@ -21,6 +21,8 @@ int	main(int argc, char **argv)
 	s = input_treatment(argc, argv);
 	if (!s)
 		exit(EXIT_FAILURE);
+	if (is_sorted(s))
+		exit(EXIT_SUCCESS);
 	if (s->size <= 5)
 		push_swap_little(s);
 	else

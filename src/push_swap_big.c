@@ -91,8 +91,6 @@ void	push_best_b_to_a(t_stacks **s, int chunck_min)
 
 void	push_swap_big(t_stacks **s)
 {
-	if (is_sorted(*s))
-		return ;
 	push_a_to_b_with_two_chuncks(s);
 	while (left_chuncked_in_b(s, (*s)->size / 2))
 		push_best_b_to_a(s, (*s)->size / 2);

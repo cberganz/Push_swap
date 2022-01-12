@@ -70,22 +70,22 @@ static void	check_actions_optimization(t_list **lst)
 {
 	if (!ft_strcmp((*lst)->next->content, "sa\n")
 		&& !ft_strcmp((*lst)->next->next->content, "sb\n"))
-		make_optimization(lst, "ss\n");
+		make_optimization(lst, ft_strdup("ss\n"));
 	else if (!ft_strcmp((*lst)->next->content, "sb\n")
 		&& !ft_strcmp((*lst)->next->next->content, "sa\n"))
-		make_optimization(lst, "ss\n");
+		make_optimization(lst, ft_strdup("ss\n"));
 	else if (!ft_strcmp((*lst)->next->content, "ra\n")
 		&& !ft_strcmp((*lst)->next->next->content, "rb\n"))
-		make_optimization(lst, "rr\n");
+		make_optimization(lst, ft_strdup("rr\n"));
 	else if (!ft_strcmp((*lst)->next->content, "rb\n")
 		&& !ft_strcmp((*lst)->next->next->content, "ra\n"))
-		make_optimization(lst, "rr\n");
+		make_optimization(lst, ft_strdup("rr\n"));
 	else if (!ft_strcmp((*lst)->next->content, "rra\n")
 		&& !ft_strcmp((*lst)->next->next->content, "rrb\n"))
-		make_optimization(lst, "rrr\n");
+		make_optimization(lst, ft_strdup("rrr\n"));
 	else if (!ft_strcmp((*lst)->next->content, "rrb\n")
 		&& !ft_strcmp((*lst)->next->next->content, "rra\n"))
-		make_optimization(lst, "rrr\n");
+		make_optimization(lst, ft_strdup("rrr\n"));
 }
 
 void	optimize_list(t_list *lst)
