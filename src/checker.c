@@ -6,7 +6,7 @@
 /*   By: cberganz <cberganz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 15:15:32 by cberganz          #+#    #+#             */
-/*   Updated: 2022/01/15 11:10:24 by cberganz         ###   ########.fr       */
+/*   Updated: 2022/01/15 12:05:48 by cberganz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	ft_exit(t_stacks **s, t_list **lst, int exit_code)
 	exit(exit_code);
 }
 
-static void	fill_array(char **op)
+static void	fill_array(char **op, void (*func_ptr[])(t_stacks *))
 {
 	op[0] = "sa";
 	op[1] = "sb";
@@ -36,15 +36,26 @@ static void	fill_array(char **op)
 	op[9] = "rrb";
 	op[10] = "rrr";
 	op[11] = NULL;
+	func_ptr[0] = sa;
+	func_ptr[1] = sb;
+	func_ptr[2] = ss;
+	func_ptr[3] = pa;
+	func_ptr[4] = pb;
+	func_ptr[5] = ra;
+	func_ptr[6] = rb;
+	func_ptr[7] = rr;
+	func_ptr[8] = rra;
+	func_ptr[9] = rrb;
+	func_ptr[10] = rrr;
 }
 
 static int8_t	exec_operations(t_stacks **s, t_list *lst)
 {
 	char	*op[12];
-	void	(*func_ptr[11])(t_stacks *) = {sa, sb, ss, pa, pb, ra, rb, rr, rra, rrb, rrr};
+	void	(*func_ptr[11])(t_stacks *);
 	int		i;
 
-	fill_array(op);
+	fill_array(op, func_ptr);
 	while (lst)
 	{
 		i = 0;
