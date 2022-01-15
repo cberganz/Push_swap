@@ -6,7 +6,7 @@
 /*   By: cberganz <cberganz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 15:15:32 by cberganz          #+#    #+#             */
-/*   Updated: 2022/01/10 15:59:10 by cberganz         ###   ########.fr       */
+/*   Updated: 2022/01/15 11:10:24 by cberganz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,35 @@ static void	ft_exit(t_stacks **s, t_list **lst, int exit_code)
 {
 	if (exit_code == EXIT_SUCCESS)
 		free_stacks(s, CLEAR_LIST);
-//	if (exit_code == EXIT_FAILURE)
-//		write(2, "Error\n", 6);
+	if (exit_code == EXIT_FAILURE)
+		write(2, "Error\n", 6);
 	ft_lstclear(lst);
 	exit(exit_code);
 }
 
+static void	fill_array(char **op)
+{
+	op[0] = "sa";
+	op[1] = "sb";
+	op[2] = "ss";
+	op[3] = "pa";
+	op[4] = "pb";
+	op[5] = "ra";
+	op[6] = "rb";
+	op[7] = "rr";
+	op[8] = "rra";
+	op[9] = "rrb";
+	op[10] = "rrr";
+	op[11] = NULL;
+}
+
 static int8_t	exec_operations(t_stacks **s, t_list *lst)
 {
-	char	*op[12] = {"sa", "sb", "ss", "pa", "pb", "ra", "rb", "rr", "rra", "rrb", "rrr", NULL};
-	void (*func_ptr[11])(t_stacks *) = { sa, sb, ss, pa, pb, ra, rb, rr, rra, rrb, rrr };
-	int i;
+	char	*op[12];
+	void	(*func_ptr[11])(t_stacks *) = {sa, sb, ss, pa, pb, ra, rb, rr, rra, rrb, rrr};
+	int		i;
 
+	fill_array(op);
 	while (lst)
 	{
 		i = 0;
@@ -44,13 +61,12 @@ static int8_t	exec_operations(t_stacks **s, t_list *lst)
 
 static uint8_t	init_operations_list(t_list **lst)
 {
-	int		ret;
 	int		count;
 	char	c;
 	char	op[4];
 
 	count = 0;
-	while ((ret = read(STDIN_FILENO, &c, 1)) > 0)
+	while (read(STDIN_FILENO, &c, 1) > 0)
 	{
 		if (c != '\n' && count < 3)
 		{
@@ -78,7 +94,7 @@ int	main(int argc, char **argv)
 	if (argc < 2)
 		return (EXIT_SUCCESS);
 	if (!init_operations_list(&lst))
-		ft_exit(&s, &lst, EXIT_SUCCESS);
+		ft_exit(&s, &lst, EXIT_FAILURE);
 	s = input_treatment(argc, argv);
 	if (!s)
 		ft_exit(&s, &lst, EXIT_FAILURE);
